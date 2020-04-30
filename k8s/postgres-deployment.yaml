@@ -23,10 +23,7 @@ spec:
           - name: POSTGRES_USER
             value: postgres
           - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: pgpassword
-                key: PGPASSWORD  
+            value: postgres
           - name: POSTGRES_HOST_AUTH_METHOD
             value: trust
           ports:
