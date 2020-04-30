@@ -18,7 +18,8 @@ const pgClient = new Pool({
   password: keys.pgPassword,
   port: keys.pgPort
 })
-pgClient.on('error', () => console.log('Lost PG connection'));
+let error_pg = 'connection ok';
+pgClient.on('error', () => error_pg = 'Lost PG connection');
 
 pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)')
   .catch((err) => console.log(err));
@@ -42,7 +43,7 @@ const redisPublisher = redisClient.duplicate();
 // Express route handlers
 
 app.get('/', (req, res) => {
-  res.send('Hi');
+  res.send(`Hi ${error_pg} `);
 })
 
 app.get('/values/all', async (req, res) => {
