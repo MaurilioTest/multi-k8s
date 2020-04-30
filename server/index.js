@@ -43,7 +43,8 @@ const redisPublisher = redisClient.duplicate();
 // Express route handlers
 
 app.get('/', (req, res) => {
-  res.send(`Hi ${error_pg} `);
+  const values = await pgClient.query('SELECT datname FROM pg_database WHERE datistemplate = false');
+  res.send(`Hi ${values} `);
 })
 
 app.get('/values/all', async (req, res) => {
